@@ -6,6 +6,7 @@ Release:	1
 License:	GPL
 Group:		Applications/Networking
 Source0:	ftp://sunsite.unc.edu/pub/Linux/system/network/sunacm/Other/netdate/%{name}-%{version}.tar.gz
+# Source0-md5:	8bbc82a2df10088d75672b31a80f1a0f
 Patch0:		%{name}-hurricane.patch
 Patch1:		%{name}-nread.patch
 Patch2:		%{name}-main-prototype.patch
