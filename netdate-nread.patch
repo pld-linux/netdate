@@ -1,0 +1,26 @@
+--- netdate-1.16/netdate.c.orig	Tue Apr 20 08:20:21 1999
++++ netdate-1.16/netdate.c	Tue Apr 20 08:24:08 1999
+@@ -318,7 +318,7 @@
+ 		exit(1);
+ 	}
+ 	if (settimeofday (&thishost -> then, (struct timezone *)0) == -1)
+-		perror ("netdate; settimeofday");
++		perror ("netdate: settimeofday");
+ 	else {
+ 		int wf;
+ 		if ((wf = open(WTMP, 1)) >= 0) {
+@@ -456,12 +456,12 @@
+ 	(void)gettimeofday (&thishost -> acked, (struct timezone *)0);
+ 	(void)alarm(0);
+ 	now = thishost -> acked;
+-	if (nread < sizeof(thishost -> then.tv_sec)) {
++	if (nread < (int) sizeof(thishost -> then.tv_sec)) {
+ 		perror ("netdate: read");
+ 		goto bad;
+ 	}
+ 	/* RFC 868 only allows seconds, but what the hell */
+-	if (nread == sizeof(thishost -> then))
++	if (nread == (int) sizeof(thishost -> then))
+ 		thishost -> then.tv_usec = ntohl(thishost -> then.tv_usec);
+ 	else
+ 		thishost -> then.tv_usec = 0L;

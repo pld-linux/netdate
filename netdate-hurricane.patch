@@ -1,0 +1,89 @@
+diff -u netdate-1.16/Makefile netdate-1.16.new/Makefile
+--- netdate-1.16/Makefile	Mon Jan 18 23:08:58 1993
++++ netdate-1.16.new/Makefile	Fri Feb  1 01:02:15 2002
+@@ -1,9 +1,9 @@
+ MANDIR=/usr/man/man8
+-DESTDIR=/etc/inet
++DESTDIR=/usr/sbin
+ 
+ all:
+ 	rm -f netdate
+-	cc -O2 -Wall -o netdate netdate.c
++	$(CC) -O2 -Wall -o netdate netdate.c
+ 
+ install: netdate
+ 	install -s netdate $(DESTDIR)/netdate
+diff -u netdate-1.16/netdate.c netdate-1.16.new/netdate.c
+--- netdate-1.16/netdate.c	Tue Jan 19 22:37:26 1993
++++ netdate-1.16.new/netdate.c	Fri Feb  1 01:02:15 2002
+@@ -45,8 +45,8 @@
+ #define WTMP "/etc/wtmp"
+ 
+ struct utmp wtmp[2] = {
+-	{ 0, 0, "|", "", 0, "", "", 0},
+-	{ 0, 0, "{", "", 0, "", "", 0}
++	{ 0, 0, "|", {}, {}, {}, {}, 0},
++	{ 0, 0, "{", {}, {}, {}, {}, 0}
+ };
+ 
+ char *service = "time";
+@@ -98,7 +98,7 @@
+ 	fprintf (stderr,
+ "usage: %s [ -l limit ] host ...\n"
+ "%s tries to find a group of at least two hosts whose times agree\n"
+-"within %d seconds, and sets the time to that of the first host in the group.\n",
++"within %ld seconds, and sets the time to that of the first host in the group.\n",
+ 		whoami, whoami, limit);
+ 	fprintf (stderr,
+ "The limit may be set with the -l option.  Setting it to zero (or supplying\n"
+@@ -155,7 +155,7 @@
+ 	if (*argv == NULL)
+ 		usage();
+ 	if (debug)
+-		fprintf (stderr, "%s: rdate %d; verbose %d; limit %d.\n", 
++		fprintf (stderr, "%s: rdate %d; verbose %d; limit %ld.\n", 
+ 			whoami, rdate, verbose, limit);
+ 	for (thishost = &timehosts[0]; *argv != NULL; argv++) {
+ 		if (thishost >= tophost) {
+@@ -189,7 +189,7 @@
+ 		exit(1);
+ 	if ((thishost = mungediffs(thishost)) == NULL) {
+ 		fprintf (stderr,
+-			"No two hosts agree on the time within %d seconds\n",
++			"No two hosts agree on the time within %ld seconds\n",
+ 			limit);
+ 		exit(1);
+ 	}
+@@ -284,7 +284,7 @@
+ 			}
+ 		}
+ 		if (verbose) {
+-			printf (" %d\n", thishost -> count);
++			printf (" %ld\n", thishost -> count);
+ 			(void)fflush(stdout);
+ 		}
+ 		if (thishost -> count > goodhost -> count)
+@@ -312,7 +312,7 @@
+ 	&& abs((thishost -> then.tv_sec - now.tv_sec) - thishost -> difference)
+ 	    > limit) {
+ 		fprintf (stderr,
+-		"Time from %s has varied more than the limit of %d seconds\n",
++		"Time from %s has varied more than the limit of %ld seconds\n",
+ 			thishost -> hostname, limit);
+ 		printit(thishost);
+ 		exit(1);
+@@ -348,12 +348,12 @@
+ 		(void)sprintf(newstring, "%s ", thishost -> hostname);
+ 		tvsub(&diff, &thishost -> then, &now);
+ 		printdiff(&newstring[strlen(newstring)], &diff);
+-		printf ("%-24s %.19s.%03d", newstring,
++		printf ("%-24s %.19s.%03ld", newstring,
+ 			ctime((unsigned long *)&thishost -> then.tv_sec),
+ 				thishost -> then.tv_usec / 1000);
+ 		if (verbose) {
+ 			tp = localtime((unsigned long *)&thishost -> acked);
+-			printf(" at %02d:%02d:%02d.%03d",
++			printf(" at %02d:%02d:%02d.%03ld",
+ 				tp -> tm_hour, tp -> tm_min, tp -> tm_sec,
+ 				thishost -> acked.tv_usec / 1000);
+ 			tvsub(&diff, &thishost -> acked, &thishost -> asked);
