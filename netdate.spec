@@ -35,13 +35,11 @@ install -d $RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8}
 install netdate.8 $RPM_BUILD_ROOT%{_mandir}/man8
 install netdate $RPM_BUILD_ROOT%{_sbindir}
 
-gzip -9nf README
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.gz
+%doc README
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man8/*
