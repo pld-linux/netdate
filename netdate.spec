@@ -5,8 +5,6 @@ Version:	1.16
 Release:	1
 License:	GPL
 Group:		Applications/Networking
-Group(de):	Applikationen/Netzwerkwesen
-Group(pl):	Aplikacje/Sieciowe
 Source0:	ftp://sunsite.unc.edu/pub/Linux/system/network/sunacm/Other/netdate/%{name}-%{version}.tar.gz
 Patch0:		%{name}-hurricane.patch
 Patch1:		%{name}-nread.patch
