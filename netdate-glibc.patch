@@ -1,0 +1,20 @@
+--- netdate.c.orig	Wed Sep 25 01:09:18 2002
++++ netdate.c	Wed Sep 25 01:19:42 2002
+@@ -29,7 +29,7 @@
+ #include <sys/stat.h>
+ #include <sys/ioctl.h>
+ #include <sys/socket.h>
+-#include <sys/time.h>
++#include <time.h>
+ 
+ #include <netinet/in.h>
+ 
+@@ -52,7 +52,7 @@
+ char *service = "time";
+ char *defaultproto = "udp";
+ /* difference between 1900 (RFC868) and 1970 (UNIX) base times */
+-#define NETBASE	2208988800
++#define NETBASE	2208988800UL
+ 
+ long limit = 5;
+ #define MAXHOSTS 20
