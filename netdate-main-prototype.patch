@@ -1,0 +1,20 @@
+--- netdate-1.16/netdate.c~	Fri Feb  1 01:11:47 2002
++++ netdate-1.16/netdate.c	Fri Feb  1 01:11:47 2002
+@@ -78,7 +78,7 @@
+ 
+ void	usage (void);
+ int	setproto (char *, struct timehost *);
+-void	main (int, char **);
++int	main (int, char **);
+ int	getdiff (struct timehost *);
+ int	getdate (struct timehost *);
+ void	printit (struct timehost *);
+@@ -112,7 +112,7 @@
+ int verbose = 0;
+ int debug = 0;
+ 
+-void
++int
+ main (int argc, char **argv)
+ {
+ 	extern char *rindex();
