@@ -9,6 +9,7 @@ Source0:	ftp://sunsite.unc.edu/pub/Linux/system/network/sunacm/Other/netdate/%{n
 Patch0:		%{name}-hurricane.patch
 Patch1:		%{name}-nread.patch
 Patch2:		%{name}-main-prototype.patch
+Patch3:		%{name}-glibc.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -24,6 +25,7 @@ poprzez sieæ zgodnie z RFC 868.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p0
 
 %build
 %{__make} CC="%{__cc} %{rpmldflags} %{rpmcflags} -Wall"
@@ -41,5 +43,5 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man8/*
