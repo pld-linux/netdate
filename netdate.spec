@@ -1,5 +1,5 @@
 Summary:	Allows setting system time from across a network
-Summary(pl):	Pozwala na synchronizacjê czasu systemowego poprzez sieæ
+Summary(pl.UTF-8):   Pozwala na synchronizacjÄ™ czasu systemowego poprzez sieÄ‡
 Name:		netdate
 Version:	1.16
 Release:	1
@@ -17,9 +17,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Allows for checking and setting the local system time from across a
 network as specified by RFC 868.
 
-%description -l pl
-Pozwala na sprawdzenie i synchronizacjê czasu lokalnego systemu
-poprzez sieæ zgodnie z RFC 868.
+%description -l pl.UTF-8
+Pozwala na sprawdzenie i synchronizacjÄ™ czasu lokalnego systemu
+poprzez sieÄ‡ zgodnie z RFC 868.
 
 %prep
 %setup -q
