@@ -1,5 +1,5 @@
 Summary:	Allows setting system time from across a network
-Summary(pl.UTF-8):   Pozwala na synchronizację czasu systemowego poprzez sieć
+Summary(pl.UTF-8):	Pozwala na synchronizację czasu systemowego poprzez sieć
 Name:		netdate
 Version:	1.16
 Release:	1
